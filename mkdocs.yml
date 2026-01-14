@@ -1,0 +1,53 @@
+site_name: ForgeMini 
+site_url: https://imcab.github.io/FORGEMiniDocs/
+
+theme:
+  name: material
+  logo: assets/logo.png 
+  favicon: assets/logo.png
+  palette: 
+    scheme: default
+    primary: white
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - content.tabs.link
+    - navigation.footer
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Instalación: instalacion.md
+  - Guía:
+      - "IO":
+          - "NetworkIO": guia/networkio.md
+          - "IOSubsystem": guia/iosubsystem.md
+      - "Anotaciones":
+          - "@Signal": guia/anotaciones/signal.md
+          - "@Tunable": guia/anotaciones/tunable.md
+      - "SmartChooser":
+          - "SmartChooser": guia/sendable.md
+      - "Optimizador": 
+          - "Optimizer": guia/optimizer.md
+  - API Reference: https://imcab.github.io/FORGEmini/
