@@ -1,0 +1,39 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-in {
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.delay-1 { animation-delay: 0.2s; } /* Título */
+.delay-2 { animation-delay: 0.4s; } /* Botones */
+.delay-3 { animation-delay: 0.6s; } /* Cards */
+.delay-4 { animation-delay: 0.8s; } /* Footer */
+
+@keyframes logoFadeInPremium {
+  from {
+    opacity: 0;
+    transform: scale(0.92); /* Empieza un poco más pequeño */
+    filter: blur(8px);      /* Empieza borroso */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);    /* Tamaño normal */
+    filter: blur(0);        /* Nítido */
+  }
+}
+
+.logo-fade{
+  /* Usamos 'forwards' para que se quede en el estado final */
+  animation: logoFadeInPremium 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
