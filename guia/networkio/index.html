@@ -556,6 +556,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#subdirectorios-y-jerarquias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subdirectorios y Jerarquías
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -589,6 +600,34 @@
     <span class="md-ellipsis">
       
         Objetos complejos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Objetos complejos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-structs-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Structs comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colores
       
     </span>
   </a>
@@ -1062,6 +1101,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#subdirectorios-y-jerarquias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subdirectorios y Jerarquías
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1095,6 +1145,34 @@
     <span class="md-ellipsis">
       
         Objetos complejos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Objetos complejos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-structs-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Structs comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colores
       
     </span>
   </a>
@@ -1198,6 +1276,24 @@
 </div>
 </div>
 </div>
+<h3 id="subdirectorios-y-jerarquias"><strong>Subdirectorios y Jerarquías</strong></h3>
+<p>NetworkTables 4 soporta carpetas anidadas de forma nativa. <strong>NetworkIO</strong> te permite organizar datos complejos dentro de un mismo subsistema usando el separador <code>/</code> en el nombre de la clave.</p>
+<p>Esto es increíblemente útil para agrupar datos relacionados (como PID, Odometría o Estado de Motores) sin ensuciar la vista principal.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 1. Datos generales en la raíz del subsistema</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Drive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MaxSpeed&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">// Ruta final: Drive/MaxSpeed</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">// 2. Agrupando datos de Odometría en una subcarpeta</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Drive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Odometry/IsReady&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Drive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Odometry/Frequency&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">50.0</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">// Ruta final: Drive/Odometry/Frequency</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">// 3. Jerarquías profundas (ej. Módulos Swerve)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Drive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Modules/FrontLeft/Angle&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.2</span><span class="p">);</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Drive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Modules/FrontLeft/Speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">);</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">// Ruta final: Drive/Modules/FrontLeft/Angle</span>
+</code></pre></div>
+<p>Visualmente, Dashboard como <strong>Shuffleboard</strong> o <strong>Elastic</strong> o sofwares como <strong>AdvantageScope</strong> crearán automáticamente menús desplegables para estas carpetas.</p>
 <p><img alt="AdvantageScope" src="../../assets/advantage.png" /></p>
 <p><em>Datos publicados con <code>NetworkIO</code> mostrados en AdvantageScope</em></p>
 <div class="admonition tip">
@@ -1208,21 +1304,24 @@
 <h2 id="enviar-datos-set"><strong>Enviar Datos <code>Set</code></strong></h2>
 <p>Para enviar datos a la red, usa el método estático <code>set</code>. NetworkIO decidirá automáticamente si usar una implementación optimizada para primitivos o la lógica de Structs.</p>
 <h3 id="primitivos"><strong>Primitivos</strong></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span><span class="c1">// Enviando números (Double)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;DriveTrain&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">);</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Shooter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3500.0</span><span class="p">);</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="c1">// Enviando booleanos (Boolean)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Intake&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IsDeployed&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="c1">// Enviando texto (String)</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Auto&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Running Path A&quot;</span><span class="p">);</span>
+<p><img alt="Robot" src="../../assets/speed.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">    </span><span class="c1">// Enviando números (Double)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;DriveTrain&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Shooter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3500.0</span><span class="p">);</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="c1">// Enviando booleanos (Boolean)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Intake&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IsDeployed&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="c1">// Enviando texto (String)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Auto&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Running Path A&quot;</span><span class="p">);</span>
 </code></pre></div>
-<p><strong>Tipos soportados:</strong> <code>double</code>, <code>boolean</code>, <code>String</code>.</p>
+<p><strong>Tipos soportados:</strong> <code>double</code>, <code>boolean</code>, <code>String</code>, <code>Color</code>, <code>double[]</code>.</p>
 <h3 id="objetos-complejos"><strong>Objetos complejos</strong></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Objetos Complejos (Usa Magic Structs)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">// Automáticamente detecta que Pose2d tiene un struct y lo publica</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Odometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RobotPose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentPose</span><span class="p">);</span>
+<p>Los Objetos complejos son cualquier objeto que use los <code>structs</code>, <code>NetworkIO</code> publica estos datos sin tenerte que preocupar del código. En este ejemplo publicaremos una <code>Pose2d</code> con <code>NetworkIO</code></p>
+<p><img alt="Robot" src="../../assets/bot.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Objetos Complejos (Usa Magic Structs)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">// Automáticamente detecta que Pose2d tiene un struct y lo publica</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Swerve&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentPose</span><span class="p">);</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1233,19 +1332,41 @@
 <p>No necesitas registrar nada manual. <code>NetworkIO</code> inspecciona el objeto en tiempo de ejecución, encuentra su campo <code>.struct</code> automáticamente y lo serializa de la forma más eficiente para <strong>NetworkTables 4.0</strong>.</p>
 </div>
 <hr />
+<h4 id="tipos-de-structs-comunes">Tipos de <code>Structs</code> comunes</h4>
+<p>Todos y cada uno de estos datos son <strong>compatibles</strong> y seguros de publicar con <code>NetworkIO</code>:</p>
+<ul>
+<li><code>Pose2d</code></li>
+<li><code>Pose3d</code></li>
+<li><code>Rotation2d</code></li>
+<li><code>Rotation3d</code></li>
+<li><code>Twist2d</code></li>
+<li><code>Translation2d</code></li>
+<li><code>ChassisSpeeds</code></li>
+<li><code>ChassisSpeeds[]</code></li>
+<li><code>SwerveModulePosition[]</code></li>
+<li><code>SwerveModuleState[]</code></li>
+<li><code>Transform2d</code></li>
+</ul>
+<p>Estos son algunos ejemplos mas, <code>NetworkIO</code> es compatible con <strong>cualquier tipo de dato</strong> que use <code>struct</code> incluyendo su version como <strong>array</strong>.</p>
+<h3 id="colores"><strong>Colores</strong></h3>
+<p>A partir de la versión <code>1.0.6</code>, <code>NetworkIO</code> permite publicar Colores (<code>Color</code>) para verlos en dashboards como <strong>Elastic</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Enviando Colores (Color - se convierte autom. a Hex String)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;Leds&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;StatusColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="na">kOrange</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="Color" src="../../assets/color.png" /></p>
 <h2 id="recibir-datos-gets"><strong>Recibir Datos <code>Gets</code></strong></h2>
 <p>Para leer valores desde el Dashboard (útil para sintonizar PIDs o cambiar constantes sin redesplegar código), utiliza el método <code>NetworkIO.get</code>.</p>
 <p>Este sistema es <strong>seguro por defecto</strong>: siempre debes proporcionar un <code>defaultValue</code>. Si la conexión se pierde o la clave no existe en NetworkTables, tu robot usará ese valor por defecto en lugar de crashear.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">    </span><span class="c1">// Leyendo un PID (Si no existe, usa 0.0)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;DriveTrain&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kP&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="c1">// Leyendo un interruptor (Si no existe, usa false)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDebug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;Global&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DebugMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1">// Úsalo directamente en tu lógica</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;Shooter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ForceFire&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">shoot</span><span class="p">();</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="c1">// Leyendo un PID (Si no existe, usa 0.0)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;DriveTrain&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kP&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="c1">// Leyendo un interruptor (Si no existe, usa false)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDebug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;Global&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DebugMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="c1">// Úsalo directamente en tu lógica</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;Shooter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ForceFire&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="n">shoot</span><span class="p">();</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <p>Tipos soportados: <code>double</code>, <code>boolean</code>.</p>
 <div class="admonition warning">
@@ -1257,52 +1378,52 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">SimpleShooter.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">frc.robot.subsystems</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.wpilibj2.command.SubsystemBase</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.stzteam.forgemini.io.NetworkIO</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1. Importar la librería</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleShooter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="c1">// Definimos el nombre de la tabla una sola vez para evitar errores de dedo</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">TABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Shooter&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.005</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SimpleShooter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="c1">// Opcional: Publicar valores iniciales para que aparezcan en Glass</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TargetRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3000.0</span><span class="p">);</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">        </span><span class="c1">// =================================================</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="c1">// 1. TELEMETRÍA (Outputs)</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">        </span><span class="c1">// =================================================</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">        </span><span class="c1">// Publicamos el estado actual del mecanismo</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CurrentRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentRPM</span><span class="p">);</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IsReady&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2900</span><span class="p">);</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">        </span><span class="c1">// =================================================</span>
-<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">        </span><span class="c1">// 2. SINTONIZACIÓN (Inputs)</span>
-<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">        </span><span class="c1">// =================================================</span>
-<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">        </span><span class="c1">// Leemos valores en tiempo real para ajustar el PID sin recompilar</span>
-<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TargetRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>
-<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">        </span><span class="c1">// Actualizamos el PID solo si cambiamos el valor en el Dashboard</span>
-<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kP&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.005</span><span class="p">);</span>
-<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">        </span><span class="c1">// Lógica del motor</span>
-<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="w">        </span><span class="n">runMotor</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
-<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
-<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runMotor</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="w">        </span><span class="c1">// Lógica simulada de control</span>
-<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">currentRPM</span><span class="p">;</span>
-<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="w">        </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kP</span><span class="p">;</span>
-<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">frc.robot.subsystems</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.wpilibj2.command.SubsystemBase</span><span class="p">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.stzteam.forgemini.io.NetworkIO</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1. Importar la librería</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleShooter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="c1">// Definimos el nombre de la tabla una sola vez para evitar errores de dedo</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">TABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Shooter&quot;</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.005</span><span class="p">;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SimpleShooter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="c1">// Opcional: Publicar valores iniciales para que aparezcan en Glass</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TargetRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3000.0</span><span class="p">);</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">        </span><span class="c1">// =================================================</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">        </span><span class="c1">// 1. TELEMETRÍA (Outputs)</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">        </span><span class="c1">// =================================================</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">        </span><span class="c1">// Publicamos el estado actual del mecanismo</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CurrentRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentRPM</span><span class="p">);</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">        </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IsReady&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2900</span><span class="p">);</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">        </span><span class="c1">// =================================================</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">        </span><span class="c1">// 2. SINTONIZACIÓN (Inputs)</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">        </span><span class="c1">// =================================================</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="w">        </span><span class="c1">// Leemos valores en tiempo real para ajustar el PID sin recompilar</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TargetRPM&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">        </span><span class="c1">// Actualizamos el PID solo si cambiamos el valor en el Dashboard</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">kP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">TABLE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kP&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.005</span><span class="p">);</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">        </span><span class="c1">// Lógica del motor</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="w">        </span><span class="n">runMotor</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runMotor</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="w">        </span><span class="c1">// Lógica simulada de control</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">currentRPM</span><span class="p">;</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="w">        </span><span class="n">currentRPM</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kP</span><span class="p">;</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a><span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
@@ -1328,11 +1449,11 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Limpia toda la basura de la tabla de pruebas al iniciar</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nd">@Override</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">closeAll</span><span class="p">(</span><span class="s">&quot;TestTable&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Limpia toda la basura de la tabla de pruebas al iniciar</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nd">@Override</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">NetworkIO</span><span class="p">.</span><span class="na">closeAll</span><span class="p">(</span><span class="s">&quot;TestTable&quot;</span><span class="p">);</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
 </code></pre></div>
 
 

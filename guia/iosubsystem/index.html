@@ -598,18 +598,7 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optimizaciones-automaticas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optimizaciones Automáticas
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Optimizaciones Automáticas">
+    <nav class="md-nav" aria-label="Ejemplo Completo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -623,11 +612,39 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#ejemplo-con-objetos-complejos-structs" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-manuales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ejemplo con Objetos Complejos (Structs)
+        Métodos Manuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos Manuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publicar-setters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publicar (Setters)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer (Getters)
       
     </span>
   </a>
@@ -636,17 +653,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limpieza-de-recursos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limpieza de Recursos
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1065,18 +1071,7 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optimizaciones-automaticas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optimizaciones Automáticas
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Optimizaciones Automáticas">
+    <nav class="md-nav" aria-label="Ejemplo Completo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1090,11 +1085,39 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#ejemplo-con-objetos-complejos-structs" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-manuales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ejemplo con Objetos Complejos (Structs)
+        Métodos Manuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos Manuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publicar-setters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publicar (Setters)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer (Getters)
       
     </span>
   </a>
@@ -1103,17 +1126,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limpieza-de-recursos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limpieza de Recursos
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1136,7 +1148,7 @@
 
 <h1 id="iosubsystem-base">IOSubsystem Base</h1>
 <p><strong>IOSubsystem</strong> es la clase base de alto rendimiento sobre la que debes construir tus subsistemas en <strong>ForgeMini</strong>.</p>
-<p>A diferencia de un <code>SubsystemBase</code> normal de WPILib, esta clase abstrae por completo la complejidad de NetworkTables. En lugar de escribir código repetitivo para publicar y leer datos, tú defines variables y métodos anotados, y el <strong>IOSubsystem</strong> se encarga de sincronizarlos automáticamente.</p>
+<p>A diferencia de un <code>SubsystemBase</code> normal de WPILib, esta clase abstrae por completo la complejidad de NetworkTables. En lugar de escribir código repetitivo para publicar y leer datos, tú defines variables y métodos anotados, y el <strong>IOSubsystem</strong> se encarga de sincronizarlos automáticamente usando <strong>NetworkIO</strong>.</p>
 <hr />
 <h2 id="implementacion"><strong>Implementación</strong></h2>
 <p>Para utilizar esta clase base, sigue estas reglas al crear tus subsistemas:</p>
@@ -1146,20 +1158,15 @@
 <li><strong>IMPORTANTE:</strong> Sobrescribir el método <code>periodicLogic()</code> en lugar de <code>periodic()</code>.</li>
 </ol>
 <h3 id="el-ciclo-de-vida"><strong>El Ciclo de Vida</strong></h3>
-<p>Tu subsistema ejecuta el siguiente flujo automáticamente cada 20ms (o el tiempo de ciclo del robot):</p>
-<pre class="mermaid"><code>graph LR
-    A((Inicio 20ms)) --&gt; B[Publicar @Signals]
-    B --&gt; C[Leer @Tunables]
-    C --&gt; D[Ejecutar periodicLogic]
-    style D stroke:#ff0000,stroke-width:2px</code></pre>
+<p>Tu subsistema ejecuta el siguiente flujo automáticamente cada 20ms (o el tiempo de ciclo del robot), siguiendo el modelo Input-Process-Output para minimizar la latencia.</p>
 <ol>
-<li><strong>Ejecución de Signals:</strong> Se publican los datos del robot hacia el Dashboard.</li>
-<li><strong>Ejecución de Tunables:</strong> Se actualizan las variables del robot con datos del Dashboard.</li>
-<li><strong>Ejecución de Lógica:</strong> Se ejecuta tu código personalizado en <code>periodicLogic()</code>.</li>
+<li><strong>Input (Tunables):</strong> Se leen los valores del Dashboard y se actualizan las variables locales.</li>
+<li><strong>Process (periodicLogic):</strong> Se ejecuta tu lógica de control con los datos frescos.</li>
+<li><strong>Output (Signals):</strong> Se publican los resultados en NetworkTables.</li>
 </ol>
 <hr />
 <h2 id="ejemplo-completo"><strong>Ejemplo Completo</strong></h2>
-<p>El siguiente ejemplo muestra un subsistema de disparo (Shooter) implementado con <strong>ForgeMini</strong>. Nota la ausencia de llamadas manuales a <code>NetworkTable</code>.</p>
+<p>El siguiente ejemplo muestra un subsistema de disparo (Shooter) implementado con <strong>ForgeMini</strong>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Shooter.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1197,7 +1204,7 @@
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodicLogic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">        </span><span class="c1">// Aquí va tu código normal.</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">        </span><span class="c1">// Las variables &#39;kP&#39; y &#39;targetRpm&#39; ya tienen los valores actualizados.</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">        </span><span class="c1">// Las variables &#39;kP&#39; y &#39;targetRpm&#39; ya tienen los valores actualizados automáticamente.</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">voltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calculatePid</span><span class="p">(</span><span class="n">targetRpm</span><span class="p">,</span><span class="w"> </span><span class="n">currentRpm</span><span class="p">,</span><span class="w"> </span><span class="n">kP</span><span class="p">);</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">        </span><span class="n">motor</span><span class="p">.</span><span class="na">setVoltage</span><span class="p">(</span><span class="n">voltage</span><span class="p">);</span>
@@ -1231,87 +1238,25 @@
 Si lo haces, eliminarás la lógica interna de <code>IOSubsystem</code> y las anotaciones <code>@Signal</code> y <code>@Tunable</code> dejarán de funcionar. Usa siempre <code>periodicLogic()</code>.</p>
 </div>
 <hr />
-<h2 id="optimizaciones-automaticas"><strong>Optimizaciones Automáticas</strong></h2>
-<p>El código fuente de <code>IOSubsystem</code> incluye optimizaciones avanzadas para gestionar diferentes tipos de datos:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Tipo de Dato</th>
-<th style="text-align: left;">Optimización</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Primitivos</strong> (<code>double</code>, <code>boolean</code>)</td>
-<td style="text-align: left;">Utiliza verificación de cambios (Dirty Checking). Solo actualiza la red si el valor realmente cambió respecto al ciclo anterior.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Strings</strong></td>
-<td style="text-align: left;">Realiza una verificación <code>equals()</code> antes de enviar a la red para ahorrar ancho de banda.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Structs</strong> (<code>Pose2d</code>, etc.)</td>
-<td style="text-align: left;">Detecta automáticamente si la clase soporta Structs y delega la serialización eficiente a <code>NetworkIO</code>.</td>
-</tr>
-</tbody>
-</table>
 <h3 id="filtrado-de-senales"><strong>Filtrado de Señales</strong></h3>
 <p>Puedes reducir drásticamente el uso de CPU y ancho de banda configurando los parámetros de la anotación <code>@Signal</code>:</p>
 <ul>
-<li>
-<p><strong><code>onChange = true</code></strong>: Solo envía el dato si su valor ha cambiado respecto al ciclo anterior. Ideal para booleanos de estado o modos.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Solo envía actualización cuando el sensor cambia de estado (no cada 20ms)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@Signal</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LimitSwitch&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">onChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">getLimitSwitch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_limitSwitch</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
-</code></pre></div>
-</li>
-<li>
-<p><strong><code>slowScale = N</code></strong>: Solo actualiza el valor una vez cada <em>N</em> ciclos. Útil para datos de diagnóstico o temperaturas que no requieren alta frecuencia.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 50 ciclos * 20ms = Actualiza 1 vez por segundo</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@Signal</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Motor Temp&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">slowScale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMotorTemp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_motor</span><span class="p">.</span><span class="na">getTemperature</span><span class="p">();</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div>
-</li>
+<li><strong><code>onChange = true</code></strong>: Solo envía el dato si su valor ha cambiado. Ideal para booleanos de estado.</li>
+<li><strong><code>slowScale = N</code></strong>: Solo actualiza el valor una vez cada <em>N</em> ciclos. Útil para datos de diagnóstico o temperaturas.</li>
 </ul>
-<h3 id="ejemplo-con-objetos-complejos-structs"><strong>Ejemplo con Objetos Complejos (Structs)</strong></h3>
-<p><code>IOSubsystem</code> soporta nativamente objetos complejos como <code>Pose2d</code>, <code>ChassisSpeeds</code> o <code>SwerveModuleState</code>. No necesitas hacer nada especial, simplemente retorna el objeto y la librería usará <strong>Magic Structs</strong> para serializarlo.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">DriveTrain.java</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DriveTrain</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">IOSubsystem</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DriveTrain</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;DriveTrain&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodicLogic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">m_odometry</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">m_gyro</span><span class="p">.</span><span class="na">getRotation2d</span><span class="p">(),</span><span class="w"> </span><span class="n">m_modules</span><span class="p">.</span><span class="na">getPositions</span><span class="p">());</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="c1">// ==========================================</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="c1">// SIGNAL CON POSE2D</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="c1">// ==========================================</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="c1">// Se publica automáticamente como struct array compatible con AdvantageScope</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nd">@Signal</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;RobotPose&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Pose2d</span><span class="w"> </span><span class="nf">getPose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m_odometry</span><span class="p">.</span><span class="na">getPoseMeters</span><span class="p">();</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
-</div>
 <hr />
-<h2 id="limpieza-de-recursos"><strong>Limpieza de Recursos</strong></h2>
-<p>Si necesitas detener el funcionamiento del subsistema o liberar recursos (por ejemplo, durante pruebas unitarias), la clase proporciona un método de cierre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Cierra todos los Publishers y Subscribers asociados a esta tabla</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">myShooter</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<h2 id="metodos-manuales"><strong>Métodos Manuales</strong></h2>
+<p>Si necesitas publicar o leer datos puntuales sin crear anotaciones, puedes usar los métodos manuales integrados. Utilizan la variable <code>tableName</code> definida en el constructor.</p>
+<h3 id="publicar-setters"><strong>Publicar (Setters)</strong></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Equivalente a NetworkIO.set(&quot;MiSubsistema&quot;, &quot;Estado&quot;, &quot;OK&quot;);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">this</span><span class="p">.</span><span class="na">setEntry</span><span class="p">(</span><span class="s">&quot;Estado&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OK&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">this</span><span class="p">.</span><span class="na">setEntry</span><span class="p">(</span><span class="s">&quot;Velocidad&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">this</span><span class="p">.</span><span class="na">setEntry</span><span class="p">(</span><span class="s">&quot;Pose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">currentPose</span><span class="p">);</span><span class="w"> </span><span class="c1">// Soporta Structs automáticos</span>
+</code></pre></div>
+<h3 id="leer-getters"><strong>Leer (Getters)</strong></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Lee un valor, si no existe devuelve el default</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">double</span><span class="w"> </span><span class="n">kF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getDouble</span><span class="p">(</span><span class="s">&quot;FeedForward&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">isRed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="s">&quot;IsRedAlliance&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div>
 
 

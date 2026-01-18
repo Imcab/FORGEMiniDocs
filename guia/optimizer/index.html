@@ -884,10 +884,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-gestion-de-memoria-ram" class="md-nav__link">
+  <a href="#1-gestion-de-memoria-ram-smart-gc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Gestión de Memoria RAM
+        1. Gestión de Memoria RAM (Smart GC)
       
     </span>
   </a>
@@ -895,10 +895,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-limpieza-de-logs" class="md-nav__link">
+  <a href="#2-monitoreo-de-loop-anti-lag" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Limpieza de Logs
+        2. Monitoreo de Loop (Anti-Lag)
       
     </span>
   </a>
@@ -906,10 +906,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-optimizacion-de-red" class="md-nav__link">
+  <a href="#3-limpieza-de-logs-higiene-de-disco" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Optimización de Red
+        3. Limpieza de Logs (Higiene de Disco)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-optimizacion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optimización de Red
       
     </span>
   </a>
@@ -922,10 +933,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metodos-utiles" class="md-nav__link">
+  <a href="#configuracion-avanzada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Métodos Útiles
+        Configuración Avanzada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telemetria-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetría (Dashboard)
       
     </span>
   </a>
@@ -1033,10 +1055,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-gestion-de-memoria-ram" class="md-nav__link">
+  <a href="#1-gestion-de-memoria-ram-smart-gc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Gestión de Memoria RAM
+        1. Gestión de Memoria RAM (Smart GC)
       
     </span>
   </a>
@@ -1044,10 +1066,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-limpieza-de-logs" class="md-nav__link">
+  <a href="#2-monitoreo-de-loop-anti-lag" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Limpieza de Logs
+        2. Monitoreo de Loop (Anti-Lag)
       
     </span>
   </a>
@@ -1055,10 +1077,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-optimizacion-de-red" class="md-nav__link">
+  <a href="#3-limpieza-de-logs-higiene-de-disco" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Optimización de Red
+        3. Limpieza de Logs (Higiene de Disco)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-optimizacion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optimización de Red
       
     </span>
   </a>
@@ -1071,10 +1104,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metodos-utiles" class="md-nav__link">
+  <a href="#configuracion-avanzada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Métodos Útiles
+        Configuración Avanzada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telemetria-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetría (Dashboard)
       
     </span>
   </a>
@@ -1099,88 +1143,144 @@
 
 
 <h1 id="optimizer">Optimizer</h1>
-<p><strong>Optimizer</strong> es el gestor de memoria del sistema de <strong>ForgeMini</strong>.</p>
-<p>El roboRIO tiene recursos limitados (CPU, RAM y Disco). Esta clase actúa como un "conserje" automático que trabaja en segundo plano para asegurar que el robot no sufra de <em>lag spikes</em> por falta de memoria o fallos por disco lleno.</p>
+<p><strong>Optimizer</strong> es el gestor de recursos de sistema "Ultimate" de <strong>ForgeMini</strong>.</p>
+<p>El roboRIO tiene recursos limitados (CPU, RAM y Disco). Esta clase actúa como un "conserje" automático que trabaja en segundo plano para:</p>
+<ol>
+<li>Prevenir <strong>Lag Spikes</strong> gestionando la memoria RAM.</li>
+<li>Detectar <strong>Loop Overruns</strong> (código lento).</li>
+<li>Mantener el disco limpio borrando logs antiguos.</li>
+<li>Ahorrar ancho de banda desactivando telemetría innecesaria.</li>
+</ol>
 <hr />
 <h2 id="implementacion"><strong>Implementación</strong></h2>
-<p>Para activar el Optimizer, solo necesitas agregar dos líneas en tu archivo <code>Robot.java</code>.</p>
+<p>La implementación requiere medir el tiempo de ejecución real de tu robot. Modifica tu archivo <code>Robot.java</code> de la siguiente manera:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Robot.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">frc.robot</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.wpilibj.TimedRobot</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.stzteam.forgemini.Optimizer</span><span class="p">;</span><span class="w"> </span><span class="c1">// Importar</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Robot</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TimedRobot</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">robotInit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.wpilibj.Timer</span><span class="p">;</span><span class="w"> </span><span class="c1">// Importante</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.stzteam.forgemini.Optimizer</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Robot</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TimedRobot</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Robot</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="c1">// 1. Inicializa limpieza de disco y optimización de red</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="n">Optimizer</span><span class="p">.</span><span class="na">init</span><span class="p">();</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">robotPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="c1">// 2. Monitorea la RAM y el estado de la batería</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="n">Optimizer</span><span class="p">.</span><span class="na">update</span><span class="p">();</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="c1">// 2. Inicia el cronómetro</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">();</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="c1">// ... resto de tu código</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">}</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="c1">// 3. Ejecuta tu Scheduler (Comandos)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="n">CommandScheduler</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">run</span><span class="p">();</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="c1">// 4. Calcula el tiempo real de ejecución</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">executionTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">startTime</span><span class="p">;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">        </span><span class="c1">// 5. Alimenta al Optimizer con el tiempo real</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">        </span><span class="n">Optimizer</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">executionTime</span><span class="p">);</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">Importante</p>
+<p><strong>No pases</strong> <code>kDefaultPeriod</code> (0.02) al método <code>update()</code>. Si haces eso, el sistema pensará que el robot siempre tarda 20ms y nunca detectará el lag real. Debes calcular la diferencia de tiempo como se muestra arriba.</p>
+</div>
 <hr />
 <h2 id="funciones-automaticas"><strong>Funciones Automáticas</strong></h2>
-<h3 id="1-gestion-de-memoria-ram"><strong>1. Gestión de Memoria RAM</strong></h3>
-<p>Java utiliza un "Garbage Collector" (GC) para liberar RAM. Si el GC se ejecuta durante un partido, puede congelar el robot por unos milisegundos (Lag Spike).</p>
+<h3 id="1-gestion-de-memoria-ram-smart-gc"><strong>1. Gestión de Memoria RAM (Smart GC)</strong></h3>
+<p>Java utiliza un "Garbage Collector" (GC) para liberar RAM. Si el GC se ejecuta a mitad de un partido, causa un pequeño congelamiento ("stop-the-world").</p>
 <ul>
-<li><strong>¿Qué hace Optimizer?</strong> Monitorea la RAM disponible en cada ciclo.</li>
-<li><strong>¿Cuándo actúa?</strong> Si la memoria libre cae por debajo del <strong>20%</strong> y el robot está <strong>DESHABILITADO</strong>.</li>
-<li><strong>Resultado:</strong> Fuerza una limpieza de memoria segura mientras el robot está quieto, reduciendo la probabilidad de que ocurra durante el match.</li>
+<li><strong>Lógica:</strong> Si la RAM usada supera el <strong>65%</strong> y el robot está <strong>DESHABILITADO</strong>.</li>
+<li><strong>Acción:</strong> Optimizer fuerza una limpieza de memoria preventiva mientras el robot está quieto.</li>
+<li><strong>Beneficio:</strong> Entras al partido (Teleop/Auto) con la memoria limpia, reduciendo drásticamente la probabilidad de lag durante la competencia.</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Seguridad</p>
-<p>Optimizer nunca forzará el Garbage Collector mientras el robot esté habilitado (Teleop o Autónomo) para evitar interrupciones en el control.</p>
-</div>
-<h3 id="2-limpieza-de-logs"><strong>2. Limpieza de Logs</strong></h3>
-<p>Los archivos de log (<code>.wpilog</code>) pueden llenar el disco del roboRIO rápidamente, causando que el código deje de desplegarse o falle al iniciar.</p>
+<h3 id="2-monitoreo-de-loop-anti-lag"><strong>2. Monitoreo de Loop (Anti-Lag)</strong></h3>
+<p>El código del robot debe ejecutarse cada <strong>20ms</strong> (50Hz). Si tu código tarda más (ej. 25ms), el robot se sentirá "lento" o con "jitter".</p>
 <ul>
-<li><strong>Límite:</strong> Mantiene solo los últimos <strong>10 archivos</strong> de log.</li>
-<li><strong>Acción:</strong> Al iniciar el robot (<code>init()</code>), elimina los archivos más viejos automáticamente.</li>
-<li><strong>Rendimiento:</strong> Esta tarea corre en un <strong>hilo separado</strong> (Thread) para no ralentizar el encendido del robot.</li>
+<li><strong>Detección:</strong> Si <code>executionTime &gt; 0.02s</code>.</li>
+<li><strong>Acción:</strong> Incrementa el contador <code>Sys/LoopOverruns</code> en NetworkTables.</li>
+<li><strong>Uso:</strong> Si ves que este número sube durante un match, significa que tienes código ineficiente que debes optimizar.</li>
 </ul>
-<h3 id="3-optimizacion-de-red"><strong>3. Optimización de Red</strong></h3>
-<p>WPILib habilita por defecto el <code>LiveWindow</code>, un sistema de telemetría que envía datos de <em>todos</em> los sensores y motores a la red.</p>
+<h3 id="3-limpieza-de-logs-higiene-de-disco"><strong>3. Limpieza de Logs (Higiene de Disco)</strong></h3>
+<p>Los archivos de log pueden llenar el disco del roboRIO, causando fallos críticos en el arranque.</p>
 <ul>
-<li><strong>Problema:</strong> Consume mucho ancho de banda y CPU, y raramente se usa en competencia oficial.</li>
-<li><strong>Solución:</strong> <code>Optimizer.init()</code> desactiva <code>LiveWindow</code> completamente (<code>disableAllTelemetry</code>), ahorrando recursos valiosos para tu código de visión o control.</li>
+<li><strong>Archivos soportados:</strong> <code>.wpilog</code> (WPILib DataLog) y <code>.hres</code> (Phoenix 6 Flight Recorder).</li>
+<li><strong>Límite:</strong> Mantiene solo los últimos <strong>10 archivos</strong> (configurable).</li>
+<li><strong>Rendimiento:</strong> Corre en un hilo secundario (<code>Thread</code>) para no afectar el tiempo de encendido.</li>
 </ul>
+<h3 id="4-optimizacion-de-red"><strong>4. Optimización de Red</strong></h3>
+<p>Desactiva automáticamente el <code>LiveWindow</code> de WPILib. Esto libera CPU y reduce el tráfico de red, lo cual es vital para mantener una conexión estable con la FMS y mejorar el rendimiento de las cámaras.</p>
 <hr />
-<h2 id="metodos-utiles"><strong>Métodos Útiles</strong></h2>
-<p>Además de las tareas automáticas, Optimizer ofrece utilidades estáticas accesibles desde cualquier parte del código.</p>
+<h2 id="configuracion-avanzada"><strong>Configuración Avanzada</strong></h2>
+<p>Si necesitas cambiar los valores por defecto, puedes usar los setters estáticos en <code>Robot()</code>:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Método</th>
 <th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Valor Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>Optimizer.getVoltage()</code></td>
-<td style="text-align: left;">Retorna el voltaje actual de la batería (shorthand para <code>RobotController</code>).</td>
+<td style="text-align: left;"><code>Optimizer.setLogDir(String)</code></td>
+<td style="text-align: left;">Cambia la carpeta donde se buscan los logs.</td>
+<td style="text-align: left;"><code>/home/lvuser/logs</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Optimizer.setMaxLogs(int)</code></td>
+<td style="text-align: left;">Cambia cuántos archivos de log antiguos guardar.</td>
+<td style="text-align: left;"><code>10</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Optimizer.setLoopOverrunThreshold(double)</code></td>
+<td style="text-align: left;">Cambia el umbral para considerar un ciclo como "lento".</td>
+<td style="text-align: left;"><code>0.02</code> (20ms)</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Ejemplo de uso en un comando para proteger subsistemas</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Optimizer</span><span class="p">.</span><span class="na">getVoltage</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;¡Batería baja! Reduciendo velocidad del intake.&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">intake</span><span class="p">.</span><span class="na">setSpeed</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
-</code></pre></div>
+<hr />
+<h2 id="telemetria-dashboard"><strong>Telemetría (Dashboard)</strong></h2>
+<p>Optimizer publica automáticamente las siguientes métricas en NetworkTables (tabla <code>Optimizer</code>) para que las veas en Glass o Shuffleboard:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Estado Ideal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Sys/LoopTime_ms</code></td>
+<td style="text-align: left;">Tiempo real que tarda tu código en ejecutarse.</td>
+<td style="text-align: left;"><strong>&lt; 15ms</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Sys/LoopOverruns</code></td>
+<td style="text-align: left;">Contador de veces que el código tardó más de 20ms.</td>
+<td style="text-align: left;"><strong>0</strong> (o muy bajo)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Sys/RAM_Usage_%</code></td>
+<td style="text-align: left;">Porcentaje de memoria RAM utilizada.</td>
+<td style="text-align: left;"><strong>&lt; 70%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Sys/RAM_Free_MB</code></td>
+<td style="text-align: left;">Megabytes de RAM libres.</td>
+<td style="text-align: left;"><strong>&gt; 15 MB</strong></td>
+</tr>
+</tbody>
+</table>
 
 
 
